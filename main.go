@@ -6,6 +6,7 @@ type Response struct {
 	Status  int         `json:"status"`
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
+	Meta    interface{} `json:"meta,omitempty"`
 }
 
 func NewSuccessResponse(status int, data interface{}) *Response {
@@ -13,6 +14,15 @@ func NewSuccessResponse(status int, data interface{}) *Response {
 		Status:  status,
 		Message: http.StatusText(http.StatusOK),
 		Data:    data,
+	}
+}
+
+func NewSuccessWithMetaResponse(status int, data interface{}, meta interface{}) *Response {
+	return &Response{
+		Status:  status,
+		Message: http.StatusText(http.StatusOK),
+		Data:    data,
+		Meta:    meta,
 	}
 }
 
